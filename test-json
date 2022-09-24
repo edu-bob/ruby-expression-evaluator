@@ -1,0 +1,16 @@
+= 2020-03-16
+json_lookup('{"start":"2020-03-16","label":"March 2020"}', 'start')
+
+json='{"202020":{"start":"2020-03-16","label":"March 2020"},"202030":{"start":"2020-05-04","label":"May 2020"}}'
+
+= {"start":"2020-05-04","label":"May 2020"}
+json_lookup("{json}", "202030")
+
+= 2020-05-04
+json_lookup(json_lookup("{json}", "202030"), "start")
+
+= 2020-03-16
+json_lookup(json_lookup("{json}", "202020"), "start")
+
+= May 2020
+json_lookup(json_lookup("{json}", "202030"), "label")

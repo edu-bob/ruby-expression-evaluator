@@ -1,0 +1,5 @@
+# is_empty
+= non-empty test succeeds
+is_empty("non-empty test succeeds","non-empty test fails")
+= empty check succeeds
+is_empty("", "empty check succeeds")

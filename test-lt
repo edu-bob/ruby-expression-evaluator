@@ -1,0 +1,14 @@
+# Fron Chamberlain
+context_id='fe5c752ef826833bb9bd71bab873267c2f1'
+gsub('{context_id}','(......)$','\1')
+
+lt(length('{context_id}'),6)
+if(lt(length('{context_id}'),6),'true','false')
+gsub('{context_id}','.*(......)$','\1')
+if(lt(length('{context_id}'),6),'{context_id}',gsub('{context_id}','(......)$','\1'))
+
+context_id="1234"
+lt(length('{context_id}'),6)
+gsub('{context_id}','.*(......)$','\1')
+if(lt(length('{context_id}'),6),'true','false')
+

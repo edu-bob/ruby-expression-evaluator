@@ -1,0 +1,15 @@
+s1="Summer 2020 NURS 5342 001"
+s2="Summer 2020 NURS 5440/6439"
+s3="Summer 2020 NURS 5440/6436 002"
+
+match("{s1}","(NURS)\s+(\d+)\s+(\d+)")
+match("{s1}","(NURS)\s+([\d/])+$")
+
+match("{s2}","(NURS)\s+(\d+)\s+(\d+)")
+match("{s2}","(NURS)\s+([\d/])+$")
+
+match("{s3}","(NURS)\s+(\d+)\s+(\d+)")
+match("{s3}","(NURS)\s+([\d/])+$")
+
+if(match("{s2}","(NURS)\s+([\d/]+)$"),"{s2} 001", "{s2}")
+if(match("{s1}","(NURS)\s+([\d/]+)$"),"{s2} 001", "{s1}")

@@ -1,0 +1,200 @@
+date="2019-12-02 15:00:00"
+days=7
+a="alpha"
+b="bravo"
+c="charlie"
+d="delta"
+
+= alpha...bravo...charlie...delta...{nada}
+"{a}...{b}...{c}...{d}...{nada}"
+
+= 4.0
+add(2,2)
+
+=12.0
+add(2,2,2,2,2,2)
+
+=12.0
+mult(3,4)
+
+=2.0
+sub(4,2)
+
+=5.5
+div(11,2)
+
+=9.0
+add(2,add(3,4))
+
+= 9.0
+add(add(1,1),7)
+
+=1,2,string
+to_csv(1,2,"string")
+
+= a,b,c,d
+to_csv("a", to_csv("b","c"),"d")
+
+=2020-06-02 04:00 PDT
+date_add("{date}",mult(24,60,60,div(365,2)))
+
+=1591092000
+date_add("2019-12-02 14:00:00",mult(24,60,60,div(365,2)),"%s")
+
+= 2020-06-02 03:00:00
+date_add("2019-12-02 14:00:00",mult(24,60,60,div(365,2)),"%F %T")
+
+=2019-06-03 03:00 PDT
+date_add("2019-12-02 14:00:00",mult(-24,60,60,div(365,2)))
+
+= 2019-06-03 03:00 PDT
+date_sub("2019-12-02 14:00:00",mult(24,60,60,div(365,2)))
+
+= Infinity
+div(10,0)
+
+= -8.0
+add(1,-mult(3,3))
+
+= four times twenty and seven years ago
+gsub("four score and seven years ago","(\w+) score","\1 times twenty")
+upcase("bob")
+downcase("aBcDeFgH")
+strip("  blanks everwhere   ")
+
+# expansion before evaluation
+is_merged=1
+=it is merged
+if("{is_merged}","it is merged","it is not merged")
+
+is_merged=0
+=it is not merged
+if("{is_merged}","it is merged","it is not merged")
+
+= 1
+lt(1,2)
+
+= 0
+lt(2,1)
+
+= 1
+lt("1","2")
+
+=longer than 7
+if(gt(length("Bob Brown"),7),"longer than 7","shorter than 7")
+= shorter than 12
+if(gt(length("Bob Brown"),12),"longer than 12","shorter than 12")
+
+# Matching
+= 1
+match("UPPER", "upper")
+
+# Concat test
+digits="20"
+
+semester="1"
+= 2020-Spring
+concat('20{digits}-',if(eq('{semester}','1'),'Spring',if(eq('{semester}','2'),'Summer','Fall')))
+
+semester="2"
+= 2020-Summer
+concat('20{digits}-',if(eq('{semester}','1'),'Spring',if(eq('{semester}','2'),'Summer','Fall')))
+
+semester="3"
+= 2020-Fall
+concat('20{digits}-',if(eq('{semester}','1'),'Spring',if(eq('{semester}','2'),'Summer','Fall')))
+
+# And test
+=true
+and(1,1,1)
+
+=false
+and(1,1,1,0,1)
+
+= true
+and("1","1")
+
+=false
+and("1","0")
+
+=true
+and(12,23,34,"99")
+
+# Or test
+
+= false
+or(0,0,0)
+
+=true
+or(1,1,1,0,1)
+
+=false
+or("0","0")
+
+=true
+or("0","1")
+
+=true
+or("1","0")
+
+= true
+or(12,23,34,"99")
+
+## JSON Tests
+json='{"1901A": "2019-01-30", "1902A": "2019-04-15" }'
+
+=2019-01-30
+json_lookup("{json}", "1901A")
+
+=2019-04-15
+json_lookup("{json}", "1902A")
+
+=whatever
+json_lookup("{json}", "1901B", "whatever")
+
+json_lookup("{json}", "1901B")
+
+# Error conditions
+alpha
+add(2,
+sub(1,2,3)
+date_add("xyzzy",27)
+date_add("",806400)
+
+# Fron Chamberlain
+context_id='fe5c752ef826833bb9bd71bab873267c2f1'
+
+= 35
+length('{context_id}')
+
+=67c2f1
+if(lt(length('{context_id}'),6),'{context_id}',gsub('{context_id}','.*(......)$','\1'))
+
+context_id="1234"
+= 4
+length('{context_id}')
+= 1234
+if(lt(length('{context_id}'),6),'{context_id}',gsub('{context_id}','.*(......)$','\1'))
+
+= 2020-03-16
+json_lookup('{"start":"2020-03-16","label":"March 2020"}', 'start')
+
+json='{"202020":{"start":"2020-03-16","label":"March 2020"},"202030":{"start":"2020-05-04","label":"May 2020"}}'
+
+= {"start":"2020-05-04","label":"May 2020"}
+json_lookup("{json}", "202030")
+
+= 2020-05-04
+json_lookup(json_lookup("{json}", "202030"), "start")
+
+= 2020-03-16
+json_lookup(json_lookup("{json}", "202020"), "start")
+
+= May 2020
+json_lookup(json_lookup("{json}", "202030"), "label")
+
+# is_empty
+= non-empty test succeeds
+is_empty("non-empty test succeeds","non-empty test fails")
+= empty check succeeds
+is_empty("", "empty check succeeds")
