@@ -23,7 +23,9 @@ gem build expressions.gemspec  && gem install ./expressions-0.1.0.gem
 ### Testing
 
 Evaluate just one expression
-    ruby -e "require 'expressions';puts Expressions.evaluate('add(mult(add(1,1),3),4,add(5,6))',verbosity=2)"
+```
+ruby -e "require 'expressions';puts Expressions.evaluate('add(mult(add(1,1),3),4,add(5,6))',verbosity=2)"
+```
 
 Read expressions from STDIN, for testing
 ```
